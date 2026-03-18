@@ -172,34 +172,39 @@
     }
 
     /* RATING */
-    .card-rating {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-top: 16px;
-    }
+.card-rating {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 16px;
+}
 
-    .stars {
-      display: flex;
-      gap: 3px;
-    }
+.rating-badge {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: var(--accent);
+  line-height: 1;
+}
 
-    .star {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background: var(--soft);
-    }
+.rating-bar-track {
+  flex: 1;
+  height: 3px;
+  background: var(--soft);
+  border-radius: 2px;
+  max-width: 80px;
+}
 
-    .star.filled {
-      background: var(--accent);
-    }
+.rating-bar-fill {
+  height: 100%;
+  border-radius: 2px;
+  background: var(--accent);
+}
 
-    .rating-num {
-      font-size: 0.78rem;
-      color: var(--warm-mid);
-    }
-
+.rating-num {
+  font-size: 0.75rem;
+  color: var(--warm-mid);
+}
     /* REVIEW */
     .card-review {
       margin-top: 16px;
