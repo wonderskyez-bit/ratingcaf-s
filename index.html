@@ -400,6 +400,26 @@
   .newsletter-input { width: 160px; }
   .s2, .s3 { display: none; }
 }
+    /* NAV */
+.site-nav {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 20px 60px 0;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.nav-link {
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 500;
+  transition: opacity 0.2s ease;
+}
+
+.nav-link:hover { opacity: 0.6; }
   </style>
 </head>
 <body>
@@ -429,7 +449,9 @@
   </div>
   <p class="header-sub">Rating the café's i've been to in New York City & being deadass </p>
 </header>
-
+<nav class="site-nav">
+  <a href="subscribe.html" class="nav-link">✦ get notified</a>
+</nav>
 <div class="filters">
   <span class="filter-label">Filter —</span>
   <button class="filter-btn active" data-filter="all">All</button>
