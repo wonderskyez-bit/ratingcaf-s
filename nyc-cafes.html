@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>my nyc wfh cafés</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --cream: #f7f4ef;
+      --ink: #1a1814;
+      --warm-mid: #9c8c7a;
+      --accent: #c4633a;
+      --soft: #e8e2d9;
+      --card-bg: #ffffff;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+    }
+
+    /* HEADER */
+    header {
+      padding: 80px 60px 60px;
+      max-width: 1100px;
+      margin: 0 auto;
+      border-bottom: 1px solid var(--soft);
+    }
+
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    header h1 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 400;
+      font-size: clamp(2.4rem, 5vw, 3.8rem);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+    }
+
+    header h1 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .header-meta {
+      text-align: right;
+    }
+
+    .header-meta .count {
+      font-size: 3rem;
+      font-family: 'Playfair Display', serif;
+      font-weight: 400;
+      color: var(--accent);
+      line-height: 1;
+    }
+
+    .header-meta .count-label {
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--warm-mid);
+      margin-top: 4px;
+    }
+
+    .header-sub {
+      margin-top: 24px;
+      font-size: 0.95rem;
+      color: var(--warm-mid);
+      max-width: 480px;
+      line-height: 1.6;
+    }
+
+    /* FILTERS */
+    .filters {
+      max-width: 1100px;
+      margin: 40px auto 0;
+      padding: 0 60px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .filter-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--warm-mid);
+      margin-right: 4px;
+    }
+
+    .filter-btn {
+      background: none;
+      border: 1px solid var(--soft);
+      border-radius: 100px;
+      padding: 6px 18px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 400;
+      color: var(--warm-mid);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .filter-btn:hover,
+    .filter-btn.active {
+      background: var(--ink);
+      border-color: var(--ink);
+      color: var(--cream);
+    }
+
+    /* GRID */
+    .café-grid {
+      max-width: 1100px;
+      margin: 50px auto 100px;
+      padding: 0 60px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 28px;
+    }
+
+    /* CARD */
+    .card {
+      background: var(--card-bg);
+      border-radius: 4px;
+      overflow: hidden;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      border: 1px solid var(--soft);
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(26,24,20,0.08);
+    }
+
+    .card-top {
+      padding: 28px 28px 0;
+    }
+
+    .card-neighborhood {
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+
+    .card-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.45rem;
+      font-weight: 400;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+    }
+
+    .card-address {
+      margin-top: 6px;
+      font-size: 0.8rem;
+      color: var(--warm-mid);
+    }
+
+    /* RATING */
+    .card-rating {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 16px;
+    }
+
+    .stars {
+      display: flex;
+      gap: 3px;
+    }
+
+    .star {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--soft);
+    }
+
+    .star.filled {
+      background: var(--accent);
+    }
+
+    .rating-num {
+      font-size: 0.78rem;
+      color: var(--warm-mid);
+    }
+
+    /* REVIEW */
+    .card-review {
+      margin-top: 16px;
+      padding: 0 28px;
+      font-size: 0.9rem;
+      line-height: 1.65;
+      color: #4a4540;
+    }
+
+    /* TAGS */
+    .card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 20px 28px 28px;
+    }
+
+    .tag {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      background: var(--cream);
+      border-radius: 4px;
+      padding: 5px 10px;
+      font-size: 0.75rem;
+      color: var(--warm-mid);
+    }
+
+    .tag-icon {
+      font-size: 0.85rem;
+    }
+
+    .tag.good { color: #5a7a5a; background: #eef3ee; }
+    .tag.ok   { color: #7a6a3a; background: #f5f0e5; }
+    .tag.bad  { color: #7a4a4a; background: #f5eaea; }
+
+    /* VISITED */
+    .card-footer {
+      border-top: 1px solid var(--soft);
+      padding: 12px 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .visited-date {
+      font-size: 0.75rem;
+      color: var(--warm-mid);
+      letter-spacing: 0.04em;
+    }
+
+    .visited-badge {
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    /* EMPTY STATE */
+    .empty {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 80px 20px;
+      color: var(--warm-mid);
+    }
+
+    .empty p {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.2rem;
+    }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 40px;
+      font-size: 0.78rem;
+      color: var(--warm-mid);
+      border-top: 1px solid var(--soft);
+      letter-spacing: 0.06em;
+    }
+
+    @media (max-width: 680px) {
+      header, .filters, .café-grid {
+        padding-left: 24px;
+        padding-right: 24px;
+      }
+      header { padding-top: 48px; }
+      .café-grid { grid-template-columns: 1fr; }
+      .header-top { flex-direction: column; align-items: flex-start; }
+      .header-meta { text-align: left; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-top">
+    <h1>my nyc<br><em>wfh cafés</em></h1>
+    <div class="header-meta">
+      <div class="count" id="total-count">6</div>
+      <div class="count-label">cafés visited</div>
+    </div>
+  </div>
+  <p class="header-sub">Every café I've actually worked from in New York City — rated honestly, no fluff.</p>
+</header>
+
+<div class="filters">
+  <span class="filter-label">Filter —</span>
+  <button class="filter-btn active" data-filter="all">All</button>
+  <button class="filter-btn" data-filter="Lower East Side">Lower East Side</button>
+  <button class="filter-btn" data-filter="Williamsburg">Williamsburg</button>
+  <button class="filter-btn" data-filter="West Village">West Village</button>
+  <button class="filter-btn" data-filter="Midtown">Midtown</button>
+  <button class="filter-btn" data-filter="Brooklyn Heights">Brooklyn Heights</button>
+  <button class="filter-btn" data-filter="Nolita">Nolita</button>
+</div>
+
+<div class="café-grid" id="café-grid">
+  <!-- cards injected by JS -->
+</div>
+
+<footer>updated march 2026 &nbsp;·&nbsp; new york city</footer>
+
+<script>
+  const cafes = [
+    {
+      name: "Devoción",
+      neighborhood: "Williamsburg",
+      address: "69 Grand St, Brooklyn",
+      rating: 5,
+      review: "Stunning space — the living wall alone is worth the trip. Fast WiFi, plenty of outlets, and the coffee is genuinely exceptional. Gets busy by 11am but never chaotic. My go-to for a full day of deep work.",
+      wifi: "great",
+      outlets: "plenty",
+      noise: "moderate",
+      visited: "Feb 2026"
+    },
+    {
+      name: "Café Integral",
+      neighborhood: "Nolita",
+      address: "149 Elizabeth St, Manhattan",
+      rating: 4,
+      review: "Tiny but focused. The espresso is some of the best in the city. Seating is limited so I wouldn't stay more than a few hours — but those hours are productive. Go early.",
+      wifi: "great",
+      outlets: "some",
+      noise: "quiet",
+      visited: "Jan 2026"
+    },
+    {
+      name: "Think Coffee",
+      neighborhood: "West Village",
+      address: "248 Mercer St, Manhattan",
+      rating: 4,
+      review: "Reliable in the best way. Never flashy but always functional — good WiFi, lots of seating, and no one gives you a look for staying three hours. Great if you need a full workday spot.",
+      wifi: "great",
+      outlets: "plenty",
+      noise: "moderate",
+      visited: "Dec 2025"
+    },
+    {
+      name: "Bluestone Lane",
+      neighborhood: "Midtown",
+      address: "55 Water St, Manhattan",
+      rating: 3,
+      review: "Fine for a quick hour between meetings. The Australian flat white is genuinely good but the WiFi is inconsistent and the space feels transient. Wouldn't plan a full day here.",
+      wifi: "ok",
+      outlets: "some",
+      noise: "loud",
+      visited: "Nov 2025"
+    },
+    {
+      name: "Butler",
+      neighborhood: "Lower East Side",
+      address: "115 Allen St, Manhattan",
+      rating: 5,
+      review: "Hidden gem. Calm, well-lit, and unpretentious. The kind of place you tell one friend about and regret it. Incredible for long writing sessions — I've drafted entire papers here.",
+      wifi: "great",
+      outlets: "plenty",
+      noise: "quiet",
+      visited: "Oct 2025"
+    },
+    {
+      name: "Colson Patisserie",
+      neighborhood: "Brooklyn Heights",
+      address: "374 9th St, Brooklyn",
+      rating: 4,
+      review: "More café than patisserie at this point. The pastries are unreal and the back room is quiet enough for calls. WiFi requires asking for a password but it's solid. Lovely neighborhood energy.",
+      wifi: "ok",
+      outlets: "some",
+      noise: "quiet",
+      visited: "Sep 2025"
+    }
+  ];
+
+  function tagClass(level) {
+    if (["great","plenty","quiet"].includes(level)) return "good";
+    if (["ok","some","moderate"].includes(level)) return "ok";
+    return "bad";
+  }
+
+  function renderStars(n) {
+    return Array.from({length: 5}, (_, i) =>
+      `<div class="star ${i < n ? 'filled' : ''}"></div>`
+    ).join('');
+  }
+
+  function buildCard(c) {
+    return `
+    <div class="card" data-neighborhood="${c.neighborhood}">
+      <div class="card-top">
+        <div class="card-neighborhood">${c.neighborhood}</div>
+        <div class="card-name">${c.name}</div>
+        <div class="card-address">${c.address}</div>
+        <div class="card-rating">
+          <div class="stars">${renderStars(c.rating)}</div>
+          <span class="rating-num">${c.rating}/5</span>
+        </div>
+      </div>
+      <p class="card-review">${c.review}</p>
+      <div class="card-tags">
+        <div class="tag ${tagClass(c.wifi)}"><span class="tag-icon">⚡</span>WiFi ${c.wifi}</div>
+        <div class="tag ${tagClass(c.outlets)}"><span class="tag-icon">🔌</span>Outlets ${c.outlets}</div>
+        <div class="tag ${tagClass(c.noise)}"><span class="tag-icon">🔉</span>${c.noise}</div>
+      </div>
+      <div class="card-footer">
+        <span class="visited-date">visited ${c.visited}</span>
+        <span class="visited-badge">✓ been here</span>
+      </div>
+    </div>`;
+  }
+
+  function render(filter) {
+    const grid = document.getElementById('café-grid');
+    const filtered = filter === 'all' ? cafes : cafes.filter(c => c.neighborhood === filter);
+    document.getElementById('total-count').textContent = filtered.length;
+
+    if (filtered.length === 0) {
+      grid.innerHTML = `<div class="empty"><p>no cafés in this neighborhood yet.</p></div>`;
+    } else {
+      grid.innerHTML = filtered.map(buildCard).join('');
+    }
+  }
+
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      render(btn.dataset.filter);
+    });
+  });
+
+  render('all');
+</script>
+</body>
+</html>
