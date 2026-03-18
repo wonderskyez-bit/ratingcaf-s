@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>get notified — my nyc wfh cafés</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --cream: #f7f4ef;
+      --ink: #1a1814;
+      --warm-mid: #9c8c7a;
+      --accent: #c4633a;
+      --soft: #e8e2d9;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* TOP NAV */
+    .top-nav {
+      padding: 28px 60px;
+      border-bottom: 1px solid var(--soft);
+    }
+
+    .back-link {
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--warm-mid);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .back-link:hover { color: var(--ink); }
+
+    /* MAIN */
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 80px 40px;
+      text-align: center;
+      position: relative;
+    }
+
+    /* SPARKLES */
+    .sparkle {
+      position: absolute;
+      color: var(--soft);
+      font-size: 1rem;
+      animation: twinkle 3s ease-in-out infinite;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .s1 { top: 15%; left: 10%;  animation-delay: 0s;   font-size: 0.8rem; }
+    .s2 { top: 25%; right: 12%; animation-delay: 0.5s; font-size: 1.1rem; }
+    .s3 { top: 60%; left: 8%;  animation-delay: 1s;   font-size: 0.6rem; }
+    .s4 { bottom: 20%; right: 9%; animation-delay: 0.3s; font-size: 0.9rem; }
+    .s5 { top: 40%; left: 15%; animation-delay: 0.8s; font-size: 0.7rem; }
+    .s6 { bottom: 30%; left: 20%; animation-delay: 1.3s; font-size: 1rem; }
+    .s7 { top: 20%; left: 35%; animation-delay: 0.2s; font-size: 0.5rem; }
+    .s8 { bottom: 25%; right: 20%; animation-delay: 0.9s; font-size: 0.75rem; }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.3; transform: scale(1); }
+      50%       { opacity: 1;   transform: scale(1.5); }
+    }
+
+    /* CONTENT */
+    .subscribe-box {
+      max-width: 480px;
+      width: 100%;
+      z-index: 1;
+    }
+
+    .subscribe-box h1 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 400;
+      font-size: clamp(2rem, 5vw, 3rem);
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+
+    .subscribe-box h1 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .subscribe-box p {
+      font-size: 0.92rem;
+      color: var(--warm-mid);
+      line-height: 1.65;
+      margin-bottom: 40px;
+    }
+
+    /* FORM */
+    .form-row {
+      display: flex;
+      align-items: flex-end;
+      gap: 0;
+      border-bottom: 1px solid var(--ink);
+      padding-bottom: 10px;
+      margin-bottom: 16px;
+    }
+
+    .email-input {
+      flex: 1;
+      background: none;
+      border: none;
+      outline: none;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 300;
+      color: var(--ink);
+      padding: 4px 0;
+    }
+
+    .email-input::placeholder {
+      color: var(--warm-mid);
+    }
+
+    .submit-btn {
+      background: none;
+      border: none;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      cursor: pointer;
+      padding: 4px 0 4px 16px;
+      transition: opacity 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .submit-btn:hover { opacity: 0.6; }
+
+    .form-note {
+      font-size: 0.72rem;
+      color: var(--warm-mid);
+      letter-spacing: 0.04em;
+    }
+
+    /* THANK YOU STATE */
+    .thank-you {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      animation: fadeIn 0.5s ease forwards;
+    }
+
+    .thank-you .check {
+      font-size: 2rem;
+      color: var(--accent);
+    }
+
+    .thank-you h2 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 400;
+      font-size: 2rem;
+      letter-spacing: -0.02em;
+    }
+
+    .thank-you h2 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .thank-you p {
+      font-size: 0.88rem;
+      color: var(--warm-mid);
+      line-height: 1.6;
+    }
+
+    .back-to-site {
+      margin-top: 8px;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+      border-bottom: 1px solid var(--soft);
+      padding-bottom: 2px;
+      transition: border-color 0.2s ease;
+    }
+
+    .back-to-site:hover { border-color: var(--ink); }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 680px) {
+      .top-nav { padding: 24px; }
+      main { padding: 60px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="top-nav">
+    <a href="index.html" class="back-link">← back to cafés</a>
+  </nav>
+
+  <main>
+    <!-- sparkles -->
+    <div class="sparkle s1">✦</div>
+    <div class="sparkle s2">✦</div>
+    <div class="sparkle s3">✦</div>
+    <div class="sparkle s4">✦</div>
+    <div class="sparkle s5">✦</div>
+    <div class="sparkle s6">✦</div>
+    <div class="sparkle s7">✦</div>
+    <div class="sparkle s8">✦</div>
+
+    <div class="subscribe-box">
+
+      <!-- FORM STATE -->
+      <div id="form-state">
+        <h1>stay in the<br><em>loop</em></h1>
+        <p>new cafés added as I find them — no spam, just honest reviews from someone who actually needs wifi to survive.</p>
+        <div class="form-row">
+          <input type="email" class="email-input" id="email-input" placeholder="your email address" />
+          <button class="submit-btn" onclick="handleSubmit()">notify me</button>
+        </div>
+        <p class="form-note">no fluff. unsubscribe anytime.</p>
+      </div>
+
+      <!-- THANK YOU STATE -->
+      <div class="thank-you" id="thank-you-state">
+        <div class="check">✦</div>
+        <h2>you're in,<br><em>thank you</em></h2>
+        <p>you'll hear from me next time i find a café worth talking about.</p>
+        <a href="index.html" class="back-to-site">← back to cafés</a>
+      </div>
+
+    </div>
+  </main>
+
+  <script>
+    function handleSubmit() {
+      const input = document.getElementById('email-input');
+      if (!input.value || !input.value.includes('@')) {
+        input.style.borderBottom = '1px solid #c4633a';
+        input.placeholder = 'enter a valid email';
+        return;
+      }
+      document.getElementById('form-state').style.display = 'none';
+      const ty = document.getElementById('thank-you-state');
+      ty.style.display = 'flex';
+    }
+
+    // also trigger on Enter key
+    document.getElementById('email-input').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') handleSubmit();
+    });
+  </script>
+
+</body>
+</html>
