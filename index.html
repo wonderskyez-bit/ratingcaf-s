@@ -406,12 +406,6 @@
     return "bad";
   }
 
-  function renderStars(n) {
-    return Array.from({length: 5}, (_, i) =>
-      `<div class="star ${i < n ? 'filled' : ''}"></div>`
-    ).join('');
-  }
-
   function buildCard(c) {
     return `
     <div class="card" data-neighborhood="${c.neighborhood}">
@@ -420,8 +414,9 @@
         <div class="card-name">${c.name}</div>
         <div class="card-address">${c.address}</div>
         <div class="card-rating">
-          <div class="stars">${renderStars(c.rating)}</div>
-          <span class="rating-num">${c.rating}/5</span>
+         <span class="rating-badge">${c.rating}</span>
+<div class="rating-bar-track"><div class="rating-bar-fill" style="width:${(c.rating / 5) * 100}%"></div></div>
+<span class="rating-num">/ 5</span>
         </div>
       </div>
       <p class="card-review">${c.review}</p>
