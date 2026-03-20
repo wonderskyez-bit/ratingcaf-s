@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Skyé Lowe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Cormorant+Upright:wght@300;400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;1,9..40,300&family=La+Belle+Aurore&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #FAF8F4;
+    --ink: #1C1917;
+    --warm-mid: #78716C;
+    --rule: #E7E3DB;
+    --rust: #9B4B2A;
+    --sage: #6B7A5E;
+    --gold: #B8882A;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    font-size: 15px;
+    line-height: 1.75;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 22px 60px;
+    background: rgba(250,248,244,0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s ease;
+  }
+  nav.scrolled { border-bottom-color: var(--rule); }
+
+  .nav-logo {
+    font-family: 'La Belle Aurore', cursive;
+    font-size: 1.9rem;
+    color: var(--ink);
+    text-decoration: none;
+    letter-spacing: 0.01em;
+    font-weight: 700;
+    -webkit-text-stroke: 0.5px var(--ink);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 36px;
+    list-style: none;
+  }
+  .nav-links a {
+    font-size: 0.78rem;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--warm-mid);
+    text-decoration: none;
+    font-weight: 400;
+    transition: color 0.2s ease;
+  }
+  .nav-links a:hover { color: var(--ink); }
+
+  /* HERO */
+  #home {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 120px 60px 80px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .hero-eyebrow {
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--warm-mid);
+    margin-bottom: 20px;
+    font-weight: 400;
+  }
+
+  .hero-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.6rem, 8vw, 7rem);
+    font-weight: 300;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+
+  .hero-name em {
+    font-style: italic;
+    font-family: 'La Belle Aurore', cursive;
+    font-size: 0.72em;
+    color: #4A6FA5;
+    display: block;
+    line-height: 1.2;
+  }
+
+  .hero-tagline {
+    margin-top: 28px;
+    max-width: 520px;
+    color: var(--warm-mid);
+    font-size: 1rem;
+    font-weight: 300;
+    line-height: 1.8;
+  }
+
+  .hero-cta-row {
+    margin-top: 44px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+  }
+
+  .btn-primary {
+    display: inline-block;
+    padding: 12px 28px;
+    border: 1px solid var(--ink);
+    color: var(--ink);
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 400;
+    transition: background 0.25s ease, color 0.25s ease;
+  }
+  .btn-primary:hover { background: var(--ink); color: var(--cream); }
+
+  .btn-ghost {
+    display: inline-block;
+    padding: 12px 0;
+    color: var(--warm-mid);
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-weight: 400;
+    border-bottom: 1px solid var(--rule);
+    transition: color 0.2s ease, border-color 0.2s ease;
+  }
+  .btn-ghost:hover { color: var(--ink); border-color: var(--ink); }
+
+  /* SECTIONS */
+  section {
+    padding: 100px 60px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 20px;
+    margin-bottom: 56px;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 20px;
+  }
+
+  .section-label {
+    font-family: 'La Belle Aurore', cursive;
+    font-size: 2.2rem;
+    color: var(--ink);
+    line-height: 1;
+  }
+
+  .section-number {
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--warm-mid);
+    font-weight: 400;
+  }
+
+  /* ABOUT */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+  }
+
+  .about-bio {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.35rem;
+    font-weight: 300;
+    line-height: 1.75;
+    color: var(--ink);
+  }
+
+  .about-bio strong {
+    font-style: italic;
+    font-weight: 400;
+    color: var(--rust);
+  }
+
+  .about-details {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  .detail-item {
+    border-left: 1px solid var(--rule);
+    padding-left: 20px;
+  }
+  .detail-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--warm-mid);
+    font-weight: 400;
+    margin-bottom: 4px;
+  }
+  .detail-value {
+    font-size: 0.92rem;
+    color: var(--ink);
+    font-weight: 300;
+    line-height: 1.55;
+  }
+
+  /* PROJECTS */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+  }
+
+  .project-card {
+    background: var(--cream);
+    padding: 36px 32px;
+    transition: background 0.2s ease, transform 0.25s ease, box-shadow 0.25s ease;
+    cursor: default;
+  }
+  .project-card:hover {
+    background: #F3EFE7;
+    transform: translateY(-6px);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.07);
+  }
+
+  .project-tag {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--warm-mid);
+    font-weight: 400;
+    margin-bottom: 14px;
+  }
+
+  .project-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 400;
+    line-height: 1.2;
+    color: var(--ink);
+    margin-bottom: 12px;
+  }
+
+  .project-title em {
+    font-style: italic;
+    color: var(--rust);
+  }
+
+  .project-desc {
+    font-size: 0.87rem;
+    color: var(--warm-mid);
+    font-weight: 300;
+    line-height: 1.7;
+    margin-bottom: 20px;
+  }
+
+  .project-link {
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 2px;
+    font-weight: 400;
+    transition: border-color 0.2s ease, color 0.2s ease;
+  }
+  .project-link:hover { border-color: var(--ink); }
+
+  /* ACCOMPLISHMENTS */
+  .accomplishments-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .accomplishment-row {
+    display: grid;
+    grid-template-columns: 100px 1fr auto;
+    gap: 32px;
+    align-items: baseline;
+    padding: 22px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .accomplishment-row:first-child { border-top: 1px solid var(--rule); }
+
+  .acc-year {
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    color: var(--warm-mid);
+    font-weight: 400;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .acc-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    font-weight: 400;
+    color: var(--ink);
+  }
+
+  .acc-org {
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--warm-mid);
+    font-weight: 400;
+    white-space: nowrap;
+  }
+
+  /* CONTACT */
+  #contact {
+    text-align: center;
+    padding: 100px 60px 120px;
+  }
+
+  .contact-inner { max-width: 480px; margin: 0 auto; }
+
+  .contact-script {
+    font-family: 'La Belle Aurore', cursive;
+    font-size: 3.2rem;
+    color: var(--ink);
+    margin-bottom: 16px;
+    line-height: 1.1;
+  }
+
+  .contact-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: var(--warm-mid);
+    line-height: 1.7;
+    margin-bottom: 36px;
+  }
+
+  .contact-links {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+
+  .contact-links a {
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 3px;
+    font-weight: 400;
+    transition: border-color 0.2s ease, color 0.2s ease;
+  }
+  .contact-links a:hover { border-color: var(--ink); }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--rule);
+    padding: 24px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-script {
+    font-family: 'La Belle Aurore', cursive;
+    font-size: 1.1rem;
+    color: var(--warm-mid);
+  }
+
+  .footer-copy {
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    color: var(--warm-mid);
+    font-weight: 300;
+  }
+
+  /* ANIMATIONS */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .fade-in.visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    nav { padding: 18px 24px; }
+    section, #home { padding: 80px 24px 60px; }
+    .about-grid { grid-template-columns: 1fr; gap: 40px; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .accomplishment-row { grid-template-columns: 70px 1fr; }
+    .acc-org { display: none; }
+    footer { padding: 20px 24px; }
+  }
+  .word-fade {
+    opacity: 0;
+    transform: translateY(10px);
+    display: inline-block;
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .word-fade.visible {
+    opacity: 1;
+    transform: none;
+  }
+  .word-sep {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  .word-sep.visible {
+    opacity: 1;
+  }
+</style>
+</head>
+<body>
+
+<nav id="navbar">
+  <a href="#home" class="nav-logo">Skyé</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#accomplishments">Accomplishments</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="home">
+  <p class="hero-eyebrow fade-in">Princeton University · Class of 2027</p>
+  <h1 class="hero-name fade-in">
+    Skyé Lowe
+    <em><span class="word-fade">researcher</span><span class="word-sep">, </span><span class="word-fade">storyteller</span><span class="word-sep">, </span><span class="word-fade">strategist</span></em>
+  </h1>
+  <p class="hero-tagline fade-in">
+    Psychology major. Pre-law. Fluent French speaker. I work at the intersection of behavioral science, creative storytelling, and strategic communication — finding the story in the data, and the argument in the story.
+  </p>
+  <div class="hero-cta-row fade-in">
+    <a href="#projects" class="btn-primary">View My Work</a>
+    <a href="#contact" class="btn-ghost">Get in Touch</a>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-header fade-in">
+    <span class="section-label">About</span>
+    <span class="section-number">01</span>
+  </div>
+  <div class="about-grid">
+    <div class="about-bio fade-in">
+      I'm a junior at Princeton studying <strong>Psychology</strong> with minors in French Language and Values &amp; Public Life. I'm on a pre-law track, interested in how law intersects with human behavior, identity, and narrative. Outside the classroom, I research, write, direct, and build — sometimes all at once.
+      <br><br>
+      My work has been shown at the Venice and Mallorca Art Biennales. I live report for Princeton Varsity Athletics. I help first-gen students find their voice on the page.
+    </div>
+    <div class="about-details fade-in">
+      <div class="detail-item">
+        <div class="detail-label">University</div>
+        <div class="detail-value">Princeton University, Class of 2027</div>
+      </div>
+      <div class="detail-item">
+        <div class="detail-label">Major / Minors</div>
+        <div class="detail-value">Psychology · French Language · Values &amp; Public Life</div>
+      </div>
+      <div class="detail-item">
+        <div class="detail-label">Languages</div>
+        <div class="detail-value">English (native) · French (fluent)</div>
+      </div>
+      <div class="detail-item">
+        <div class="detail-label">Currently</div>
+        <div class="detail-value">Writing Fellow · Digital Media Coordinator, Princeton Athletics · Marketing Lead, Princeton Caribbean Connection · Limits Matter Engagement Specialist, Princeton UMatter</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-header fade-in">
+    <span class="section-label">Projects</span>
+    <span class="section-number">02</span>
+  </div>
+  <div class="projects-grid">
+
+    <div class="project-card fade-in">
+      <div class="project-tag">Film · Research</div>
+      <h3 class="project-title"><em>hAiRCHITECTURE</em></h3>
+      <p class="project-desc">A research film on Black hair as identity and resistance. Exhibited at the 2025 Venice and Mallorca Art Biennales.</p>
+      <a href="project-detail.html#hairchitecture" class="project-link">Learn more →</a>
+    </div>
+
+    <div class="project-card fade-in">
+      <div class="project-tag">Research · Psychology</div>
+      <h3 class="project-title">Cognitive Dissonance & Motivation Loss</h3>
+      <p class="project-desc">Junior Paper exploring how identity-behavior conflict leads to disengagement, drawing on Festinger, Oyserman, and Covington.</p>
+      <a href="project-detail.html#dissonance" class="project-link">Read abstract →</a>
+    </div>
+
+    <div class="project-card fade-in">
+      <div class="project-tag">Research · Statistics</div>
+      <h3 class="project-title">Replication Study: Reductive Allure Effect</h3>
+      <p class="project-desc">Replication of Hopkins et al. (2016) using R and mixed-effects modeling. Examined how neuroscientific language shapes perceived explanation.</p>
+      <a href="project-detail.html#reductive" class="project-link">View on OSF →</a>
+    </div>
+
+    <div class="project-card fade-in">
+      <div class="project-tag">Legal · Immigration</div>
+      <h3 class="project-title">Project Rousseau</h3>
+      <p class="project-desc">Immigration case support — affidavit drafting, multilingual documentation, and statutory research across 9+ active client cases.</p>
+      <a href="project-detail.html#rousseau" class="project-link">Learn more →</a>
+    </div>
+
+    <div class="project-card fade-in">
+      <div class="project-tag">AI · Law &amp; Ethics</div>
+      <h3 class="project-title">Sentient Labs — Campus AI Initiative</h3>
+      <p class="project-desc">Campus AI Lead at a Series A company with 3M+ waitlisted users. Organizing AI hackathons and shaping product through student feedback.</p>
+      <a href="project-detail.html#sentient" class="project-link">Learn more →</a>
+    </div>
+
+    <div class="project-card fade-in">
+      <div class="project-tag">Strategy · Community</div>
+      <h3 class="project-title">PCC Annual Conference Series</h3>
+      <p class="project-desc">Led marketing for 3 consecutive conferences drawing 150+ attendees across Ivy+, government, and corporate sectors.</p>
+      <a href="project-detail.html#pcc" class="project-link">Learn more →</a>
+    </div>
+
+    <div class="project-card fade-in">
+      <div class="project-tag">Writing · Media</div>
+      <h3 class="project-title">Princeton Athletics Digital Media</h3>
+      <p class="project-desc">Live reporting and digital storytelling for Princeton Varsity Athletics — content strategy, social presence, student-athlete voices.</p>
+      <a href="project-detail.html#athletics" class="project-link">See work →</a>
+    </div>
+
+    <div class="project-card fade-in">
+      <div class="project-tag">Research · Psychology</div>
+      <h3 class="project-title">Behavioral Modeling, COMAN Lab</h3>
+      <p class="project-desc">Building predictive behavioral models in R to identify drivers of consumer decision-making, with ggplot2 dashboards for research teams.</p>
+      <a href="project-detail.html#coman" class="project-link">Learn more →</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ACCOMPLISHMENTS -->
+<section id="accomplishments">
+  <div class="section-header fade-in">
+    <span class="section-label">Accomplishments</span>
+    <span class="section-number">03</span>
+  </div>
+  <div class="accomplishments-list">
+
+    <div class="accomplishment-row fade-in">
+      <span class="acc-year">2026–</span>
+      <span class="acc-title">Health Promotion Engagement Specialist, UMatter</span>
+      <span class="acc-org">Princeton University</span>
+    </div>
+
+    <div class="accomplishment-row fade-in">
+      <span class="acc-year">2025–</span>
+      <span class="acc-title">Digital Media Coordinator, Princeton Varsity Athletics</span>
+      <span class="acc-org">Princeton University</span>
+    </div>
+
+    <div class="accomplishment-row fade-in">
+      <span class="acc-year">2025–</span>
+      <span class="acc-title">Campus AI Lead, Sentient Labs</span>
+      <span class="acc-org">New York, NY</span>
+    </div>
+
+    <div class="accomplishment-row fade-in">
+      <span class="acc-year">2025–</span>
+      <span class="acc-title">Behavioral Research, COMAN Lab</span>
+      <span class="acc-org">Princeton University</span>
+    </div>
+
+    <div class="accomplishment-row fade-in">
+      <span class="acc-year">2025</span>
+      <span class="acc-title">Venice &amp; Mallorca Art Biennales — <em style="font-style:italic; color:var(--warm-mid);">hAiRCHITECTURE</em> exhibited</span>
+      <span class="acc-org">International</span>
+    </div>
+
+    <div class="accomplishment-row fade-in">
+      <span class="acc-year">2025</span>
+      <span class="acc-title">Legal Intern, Project Rousseau</span>
+      <span class="acc-org">New York, NY</span>
+    </div>
+
+    <div class="accomplishment-row fade-in">
+      <span class="acc-year">2024–</span>
+      <span class="acc-title">Named Writing Fellow, University Writing Center</span>
+      <span class="acc-org">Princeton University</span>
+    </div>
+
+    <div class="accomplishment-row fade-in">
+      <span class="acc-year">2024–</span>
+      <span class="acc-title">Behavioral Research, COOPER Lab</span>
+      <span class="acc-org">Princeton University</span>
+    </div>
+
+    <div class="accomplishment-row fade-in">
+      <span class="acc-year">2024–</span>
+      <span class="acc-title">Associate Director, OneStudio — University Student Agencies</span>
+      <span class="acc-org">Princeton University</span>
+    </div>
+
+    <div class="accomplishment-row fade-in">
+      <span class="acc-year">2023–</span>
+      <span class="acc-title">Pre-Law Track, P*LAW Program</span>
+      <span class="acc-org">Princeton University</span>
+    </div>
+
+    <div class="accomplishment-row fade-in">
+      <span class="acc-year">2023–</span>
+      <span class="acc-title">Marketing &amp; Outreach Lead, Princeton Caribbean Connection</span>
+      <span class="acc-org">Princeton University</span>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner">
+    <div class="contact-script fade-in">let's connect</div>
+    <p class="contact-sub fade-in">Find me on the links below — always happy to connect.</p>
+    <div class="contact-links fade-in">
+      <a href="mailto:skyelowe@icloud.com">Email</a>
+      <a href="https://www.linkedin.com/in/sky%C3%A9lowe" target="_blank">LinkedIn</a>
+      <a href="mailto:skyelowe@icloud.com?subject=Resume%20Request&body=Hi%20Sky%C3%A9%2C%0A%0AI%27d%20love%20to%20request%20a%20copy%20of%20your%20resume.%0A%0AThank%20you!" class="resume-request">Request Resume</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="footer-script">Skyé Lowe</span>
+  <span class="footer-copy">© 2026 · Princeton, NJ</span>
+</footer>
+
+<script>
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 30);
+  });
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // staggered word fade for hero tagline
+  const words = document.querySelectorAll('.word-fade');
+  const seps = document.querySelectorAll('.word-sep');
+  setTimeout(() => {
+    words.forEach((word, i) => {
+      setTimeout(() => {
+        word.classList.add('visible');
+        if (seps[i]) setTimeout(() => seps[i].classList.add('visible'), 200);
+      }, 600 + i * 350);
+    });
+  }, 400);
+</script>
+</body>
+</html>
