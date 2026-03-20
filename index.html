@@ -1,589 +1,703 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>my nyc wfh cafés</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
-  <style>
-    :root {
-      --cream: #f7f4ef;
-      --ink: #1a1814;
-      --warm-mid: #9c8c7a;
-      --accent: #c4633a;
-      --soft: #e8e2d9;
-      --card-bg: #ffffff;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Skyé Lowe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Cormorant+Upright:wght@300;400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;1,9..40,300&family=La+Belle+Aurore&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --cream: #FAF8F4;
+    --ink: #1C1917;
+    --warm-mid: #78716C;
+    --rule: #E7E3DB;
+    --rust: #9B4B2A;
+    --sage: #6B7A5E;
+    --gold: #B8882A;
+  }
 
-    body {
-      background: var(--cream);
-      color: var(--ink);
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 300;
-    }
+  html { scroll-behavior: smooth; }
 
-    /* HEADER */
-    header {
-      padding: 80px 60px 60px;
-      max-width: 1100px;
-      margin: 0 auto;
-      border-bottom: 1px solid var(--soft);
-    }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    font-size: 15px;
+    line-height: 1.75;
+  }
 
-    .header-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      gap: 40px;
-      flex-wrap: wrap;
-    }
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 22px 60px;
+    background: rgba(250,248,244,0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s ease;
+  }
+  nav.scrolled { border-bottom-color: var(--rule); }
 
-    header h1 {
-      font-family: 'Playfair Display', serif;
-      font-weight: 400;
-      font-size: clamp(2.4rem, 5vw, 3.8rem);
-      line-height: 1.1;
-      letter-spacing: -0.02em;
-    }
+  .nav-logo {
+    font-family: 'La Belle Aurore', cursive;
+    font-size: 1.9rem;
+    color: var(--ink);
+    text-decoration: none;
+    letter-spacing: 0.01em;
+    font-weight: 700;
+    -webkit-text-stroke: 0.5px var(--ink);
+  }
 
-    header h1 em {
-      font-style: italic;
-      color: var(--accent);
-    }
+  .nav-links {
+    display: flex;
+    gap: 36px;
+    list-style: none;
+  }
+  .nav-links a {
+    font-size: 0.78rem;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--warm-mid);
+    text-decoration: none;
+    font-weight: 400;
+    transition: color 0.2s ease;
+  }
+  .nav-links a:hover { color: var(--ink); }
 
-    .header-meta {
-      text-align: right;
-    }
+  /* HERO */
+  #home {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 120px 60px 80px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
 
-    .header-meta .count {
-      font-size: 3rem;
-      font-family: 'Playfair Display', serif;
-      font-weight: 400;
-      color: var(--accent);
-      line-height: 1;
-    }
+  .hero-eyebrow {
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--warm-mid);
+    margin-bottom: 20px;
+    font-weight: 400;
+  }
 
-    .header-meta .count-label {
-      font-size: 0.78rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--warm-mid);
-      margin-top: 4px;
-    }
+  .hero-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.6rem, 8vw, 7rem);
+    font-weight: 300;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
 
-    .header-sub {
-      margin-top: 24px;
-      font-size: 0.95rem;
-      color: var(--warm-mid);
-      max-width: 480px;
-      line-height: 1.6;
-    }
+  .hero-name em {
+    font-style: italic;
+    font-family: 'La Belle Aurore', cursive;
+    font-size: 0.72em;
+    color: #4A6FA5;
+    display: block;
+    line-height: 1.2;
+  }
 
-    /* FILTERS */
-    .filters {
-      max-width: 1100px;
-      margin: 40px auto 0;
-      padding: 0 60px;
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      align-items: center;
-    }
+  .hero-tagline {
+    margin-top: 28px;
+    max-width: 520px;
+    color: var(--warm-mid);
+    font-size: 1rem;
+    font-weight: 300;
+    line-height: 1.8;
+  }
 
-    .filter-label {
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--warm-mid);
-      margin-right: 4px;
-    }
+  .hero-cta-row {
+    margin-top: 44px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+  }
 
-    .filter-btn {
-      background: none;
-      border: 1px solid var(--soft);
-      border-radius: 100px;
-      padding: 6px 18px;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 0.82rem;
-      font-weight: 400;
-      color: var(--warm-mid);
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
+  .btn-primary {
+    display: inline-block;
+    padding: 12px 28px;
+    border: 1px solid var(--ink);
+    color: var(--ink);
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 400;
+    transition: background 0.25s ease, color 0.25s ease;
+  }
+  .btn-primary:hover { background: var(--ink); color: var(--cream); }
 
-    .filter-btn:hover,
-    .filter-btn.active {
-      background: var(--ink);
-      border-color: var(--ink);
-      color: var(--cream);
-    }
+  .btn-ghost {
+    display: inline-block;
+    padding: 12px 0;
+    color: var(--warm-mid);
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-weight: 400;
+    border-bottom: 1px solid var(--rule);
+    transition: color 0.2s ease, border-color 0.2s ease;
+  }
+  .btn-ghost:hover { color: var(--ink); border-color: var(--ink); }
 
-    /* GRID */
-    .café-grid {
-      max-width: 1100px;
-      margin: 50px auto 100px;
-      padding: 0 60px;
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 28px;
-    }
+  /* SECTIONS */
+  section {
+    padding: 100px 60px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
 
-    /* CARD */
-    .card {
-      background: var(--card-bg);
-      border-radius: 4px;
-      overflow: hidden;
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
-      border: 1px solid var(--soft);
-    }
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 20px;
+    margin-bottom: 56px;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 20px;
+  }
 
-    .card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 16px 40px rgba(26,24,20,0.08);
-    }
+  .section-label {
+    font-family: 'La Belle Aurore', cursive;
+    font-size: 2.2rem;
+    color: var(--ink);
+    line-height: 1;
+  }
 
-    .card-top {
-      padding: 28px 28px 0;
-    }
+  .section-number {
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--warm-mid);
+    font-weight: 400;
+  }
 
-    .card-neighborhood {
-      font-size: 0.72rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--accent);
-      font-weight: 500;
-      margin-bottom: 8px;
-    }
+  /* ABOUT */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+  }
 
-    .card-name {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.45rem;
-      font-weight: 400;
-      line-height: 1.2;
-      letter-spacing: -0.01em;
-    }
+  .about-bio {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.35rem;
+    font-weight: 300;
+    line-height: 1.75;
+    color: var(--ink);
+  }
 
-    .card-address {
-      margin-top: 6px;
-      font-size: 0.8rem;
-      color: var(--warm-mid);
-    }
+  .about-bio strong {
+    font-style: italic;
+    font-weight: 400;
+    color: var(--rust);
+  }
 
-    /* RATING */
-.card-rating {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-top: 16px;
-}
+  .about-details {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
 
-.rating-badge {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.1rem;
-  font-weight: 400;
-  color: var(--accent);
-  line-height: 1;
-}
+  .detail-item {
+    border-left: 1px solid var(--rule);
+    padding-left: 20px;
+  }
+  .detail-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--warm-mid);
+    font-weight: 400;
+    margin-bottom: 4px;
+  }
+  .detail-value {
+    font-size: 0.92rem;
+    color: var(--ink);
+    font-weight: 300;
+    line-height: 1.55;
+  }
 
-.rating-bar-track {
-  flex: 1;
-  height: 3px;
-  background: var(--soft);
-  border-radius: 2px;
-  max-width: 80px;
-}
+  /* PROJECTS */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+  }
 
-.rating-bar-fill {
-  height: 100%;
-  border-radius: 2px;
-  background: var(--accent);
-}
+  .project-card {
+    background: var(--cream);
+    padding: 36px 32px;
+    transition: background 0.2s ease, transform 0.25s ease, box-shadow 0.25s ease;
+    cursor: default;
+  }
+  .project-card:hover {
+    background: #F3EFE7;
+    transform: translateY(-6px);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.07);
+  }
 
-.rating-num {
-  font-size: 0.75rem;
-  color: var(--warm-mid);
-}
-    /* REVIEW */
-    .card-review {
-      margin-top: 16px;
-      padding: 0 28px;
-      font-size: 0.9rem;
-      line-height: 1.65;
-      color: #4a4540;
-    }
+  .project-tag {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--warm-mid);
+    font-weight: 400;
+    margin-bottom: 14px;
+  }
 
-    /* TAGS */
-    .card-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      padding: 20px 28px 28px;
-    }
+  .project-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 400;
+    line-height: 1.2;
+    color: var(--ink);
+    margin-bottom: 12px;
+  }
 
-    .tag {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      background: var(--cream);
-      border-radius: 4px;
-      padding: 5px 10px;
-      font-size: 0.75rem;
-      color: var(--warm-mid);
-    }
+  .project-title em {
+    font-style: italic;
+    color: var(--rust);
+  }
 
-    .tag-icon {
-      font-size: 0.85rem;
-    }
+  .project-desc {
+    font-size: 0.87rem;
+    color: var(--warm-mid);
+    font-weight: 300;
+    line-height: 1.7;
+    margin-bottom: 20px;
+  }
 
-    .tag.good { color: #5a7a5a; background: #eef3ee; }
-    .tag.ok   { color: #7a6a3a; background: #f5f0e5; }
-    .tag.bad  { color: #7a4a4a; background: #f5eaea; }
+  .project-link {
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 2px;
+    font-weight: 400;
+    transition: border-color 0.2s ease, color 0.2s ease;
+  }
+  .project-link:hover { border-color: var(--ink); }
 
-    /* VISITED */
-    .card-footer {
-      border-top: 1px solid var(--soft);
-      padding: 12px 28px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
+  /* ACCOMPLISHMENTS */
+  .accomplishments-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
 
-    .visited-date {
-      font-size: 0.75rem;
-      color: var(--warm-mid);
-      letter-spacing: 0.04em;
-    }
+  .accomplishment-row {
+    display: grid;
+    grid-template-columns: 100px 1fr auto;
+    gap: 32px;
+    align-items: baseline;
+    padding: 22px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .accomplishment-row:first-child { border-top: 1px solid var(--rule); }
 
-    .visited-badge {
-      font-size: 0.7rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--accent);
-      font-weight: 500;
-    }
+  .acc-year {
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    color: var(--warm-mid);
+    font-weight: 400;
+    font-family: 'DM Sans', sans-serif;
+  }
 
-    /* EMPTY STATE */
-    .empty {
-      grid-column: 1 / -1;
-      text-align: center;
-      padding: 80px 20px;
-      color: var(--warm-mid);
-    }
+  .acc-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    font-weight: 400;
+    color: var(--ink);
+  }
 
-    .empty p {
-      font-family: 'Playfair Display', serif;
-      font-style: italic;
-      font-size: 1.2rem;
-    }
+  .acc-org {
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--warm-mid);
+    font-weight: 400;
+    white-space: nowrap;
+  }
 
-    /* FOOTER */
-    footer {
-      text-align: center;
-      padding: 40px;
-      font-size: 0.78rem;
-      color: var(--warm-mid);
-      border-top: 1px solid var(--soft);
-      letter-spacing: 0.06em;
-    }
+  /* CONTACT */
+  #contact {
+    text-align: center;
+    padding: 100px 60px 120px;
+  }
 
-    @media (max-width: 680px) {
-      header, .filters, .café-grid {
-        padding-left: 24px;
-        padding-right: 24px;
-      }
-      header { padding-top: 48px; }
-      .café-grid { grid-template-columns: 1fr; }
-      .header-top { flex-direction: column; align-items: flex-start; }
-      .header-meta { text-align: left; }
-    }
+  .contact-inner { max-width: 480px; margin: 0 auto; }
 
-    /* NEWSLETTER BAR */
-.newsletter-bar {
-  background: var(--ink);
-  padding: 22px 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  overflow: hidden;
-}
+  .contact-script {
+    font-family: 'La Belle Aurore', cursive;
+    font-size: 3.2rem;
+    color: var(--ink);
+    margin-bottom: 16px;
+    line-height: 1.1;
+  }
 
-.newsletter-inner {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 14px;
-  z-index: 1;
-}
+  .contact-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: var(--warm-mid);
+    line-height: 1.7;
+    margin-bottom: 36px;
+  }
 
-.newsletter-text {
-  font-family: 'Playfair Display', serif;
-  font-style: italic;
-  font-size: 0.95rem;
-  color: var(--cream);
-  letter-spacing: 0.02em;
-  text-align: center;
-}
+  .contact-links {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
 
-.newsletter-form {
-  display: flex;
-  gap: 0;
-  align-items: center;
-}
+  .contact-links a {
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 3px;
+    font-weight: 400;
+    transition: border-color 0.2s ease, color 0.2s ease;
+  }
+  .contact-links a:hover { border-color: var(--ink); }
 
-.newsletter-input {
-  background: transparent;
-  border: none;
-  border-bottom: 1px solid rgba(247,244,239,0.35);
-  padding: 8px 14px 8px 0;
-  font-family: 'DM Sans', sans-serif;
-  font-size: 0.82rem;
-  font-weight: 300;
-  color: var(--cream);
-  outline: none;
-  width: 220px;
-  transition: border-color 0.2s ease;
-}
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--rule);
+    padding: 24px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 
-.newsletter-input::placeholder {
-  color: rgba(247,244,239,0.4);
-}
+  .footer-script {
+    font-family: 'La Belle Aurore', cursive;
+    font-size: 1.1rem;
+    color: var(--warm-mid);
+  }
 
-.newsletter-input:focus {
-  border-bottom-color: var(--accent);
-}
+  .footer-copy {
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    color: var(--warm-mid);
+    font-weight: 300;
+  }
 
-.newsletter-btn {
-  background: none;
-  border: none;
-  border-bottom: 1px solid var(--accent);
-  padding: 8px 0 8px 18px;
-  font-family: 'DM Sans', sans-serif;
-  font-size: 0.82rem;
-  font-weight: 400;
-  color: var(--accent);
-  cursor: pointer;
-  letter-spacing: 0.06em;
-  transition: color 0.2s ease;
-  white-space: nowrap;
-}
+  /* ANIMATIONS */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .fade-in.visible {
+    opacity: 1;
+    transform: none;
+  }
 
-.newsletter-btn:hover {
-  color: var(--cream);
-  border-bottom-color: var(--cream);
-}
-
-/* SPARKLES */
-.sparkle {
-  position: absolute;
-  color: rgba(247,244,239,0.25);
-  font-size: 0.7rem;
-  animation: twinkle 3s ease-in-out infinite;
-  pointer-events: none;
-}
-
-.s1 { top: 8px;  left: 12%;  animation-delay: 0s;    font-size: 0.6rem; }
-.s2 { top: 18px; left: 28%;  animation-delay: 0.6s;  font-size: 0.5rem; }
-.s3 { bottom: 8px; left: 20%; animation-delay: 1.1s; font-size: 0.55rem; }
-.s4 { top: 10px; right: 22%; animation-delay: 0.3s;  font-size: 0.65rem; }
-.s5 { bottom: 10px; right: 14%; animation-delay: 0.9s; font-size: 0.5rem; }
-
-@keyframes twinkle {
-  0%, 100% { opacity: 0.2; transform: scale(1); }
-  50%       { opacity: 0.8; transform: scale(1.4); }
-}
-
-@media (max-width: 680px) {
-  .newsletter-bar { padding: 20px 24px; }
-  .newsletter-input { width: 160px; }
-  .s2, .s3 { display: none; }
-}
-    /* NAV */
-.site-nav {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 20px 60px 0;
-  display: flex;
-  justify-content: flex-end;
-}
-
-.nav-link {
-  font-size: 0.78rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--accent);
-  text-decoration: none;
-  font-weight: 500;
-  transition: all 0.2s ease;
-  border: 1px solid var(--accent);
-  border-radius: 100px;
-  padding: 7px 18px;
-}
-
-.nav-link:hover {
-  background: var(--accent);
-  color: var(--cream);
-  opacity: 1;
-}
-  </style>
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    nav { padding: 18px 24px; }
+    section, #home { padding: 80px 24px 60px; }
+    .about-grid { grid-template-columns: 1fr; gap: 40px; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .accomplishment-row { grid-template-columns: 70px 1fr; }
+    .acc-org { display: none; }
+    footer { padding: 20px 24px; }
+  }
+  .word-fade {
+    opacity: 0;
+    transform: translateY(10px);
+    display: inline-block;
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .word-fade.visible {
+    opacity: 1;
+    transform: none;
+  }
+  .word-sep {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  .word-sep.visible {
+    opacity: 1;
+  }
+</style>
 </head>
 <body>
-  
-<header>
-  <div class="header-top">
-    <h1>my nyc<br><em>wfh cafés</em></h1>
-    <div class="header-meta">
-      <div class="count" id="total-count">6</div>
-      <div class="count-label">cafés visited</div>
+
+<nav id="navbar">
+  <a href="#home" class="nav-logo">Skyé</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#accomplishments">Accomplishments</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="home">
+  <p class="hero-eyebrow fade-in">Princeton University · Class of 2027</p>
+  <h1 class="hero-name fade-in">
+    Skyé Lowe
+    <em><span class="word-fade">researcher</span><span class="word-sep">, </span><span class="word-fade">storyteller</span><span class="word-sep">, </span><span class="word-fade">strategist</span></em>
+  </h1>
+  <p class="hero-tagline fade-in">
+    Psychology major. Pre-law. Fluent French speaker. I work at the intersection of behavioral science, creative storytelling, and strategic communication — finding the story in the data, and the argument in the story.
+  </p>
+  <div class="hero-cta-row fade-in">
+    <a href="#projects" class="btn-primary">View My Work</a>
+    <a href="#contact" class="btn-ghost">Get in Touch</a>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-header fade-in">
+    <span class="section-label">About</span>
+    <span class="section-number">01</span>
+  </div>
+  <div class="about-grid">
+    <div class="about-bio fade-in">
+      I'm a junior at Princeton studying <strong>Psychology</strong> with minors in French Language and Values &amp; Public Life. I'm on a pre-law track, interested in how law intersects with human behavior, identity, and narrative. Outside the classroom, I research, write, direct, and build — sometimes all at once.
+      <br><br>
+      My work has been shown at the Venice and Mallorca Art Biennales. I live report for Princeton Varsity Athletics. I help first-gen students find their voice on the page.
+    </div>
+    <div class="about-details fade-in">
+      <div class="detail-item">
+        <div class="detail-label">University</div>
+        <div class="detail-value">Princeton University, Class of 2027</div>
+      </div>
+      <div class="detail-item">
+        <div class="detail-label">Major / Minors</div>
+        <div class="detail-value">Psychology · French Language · Values &amp; Public Life</div>
+      </div>
+      <div class="detail-item">
+        <div class="detail-label">Languages</div>
+        <div class="detail-value">English (native) · French (fluent)</div>
+      </div>
+      <div class="detail-item">
+        <div class="detail-label">Currently</div>
+        <div class="detail-value">Writing Fellow · Digital Media Coordinator, Princeton Athletics · Marketing Lead, Princeton Caribbean Connection · Limits Matter Engagement Specialist, Princeton UMatter</div>
+      </div>
     </div>
   </div>
-  <p class="header-sub">Rating the café's i've been to in New York City & being frl </p>
-</header>
-<nav class="site-nav">
-  <a href="subscribe.html" class="nav-link">✦ get notified</a>
-</nav>
-<div class="filters">
-  <span class="filter-label">Filter —</span>
-  <button class="filter-btn active" data-filter="all">All</button>
-  <button class="filter-btn" data-filter="Lower East Side">Lower East Side</button>
-  <button class="filter-btn" data-filter="Williamsburg">Williamsburg</button>
-  <button class="filter-btn" data-filter="West Village">West Village</button>
-  <button class="filter-btn" data-filter="Midtown">Midtown</button>
-  <button class="filter-btn" data-filter="Brooklyn Heights">Brooklyn Heights</button>
-  <button class="filter-btn" data-filter="Nolita">Nolita</button>
-</div>
+</section>
 
-<div class="café-grid" id="café-grid">
-  <!-- cards injected by JS -->
-</div>
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-header fade-in">
+    <span class="section-label">Projects</span>
+    <span class="section-number">02</span>
+  </div>
+  <div class="projects-grid">
 
-<footer>updated march 2026 &nbsp;·&nbsp; new york city</footer>
+    <div class="project-card fade-in">
+      <div class="project-tag">Film · Research</div>
+      <h3 class="project-title"><em>hAiRCHITECTURE</em></h3>
+      <p class="project-desc">A research film on Black hair as identity and resistance. Exhibited at the 2025 Venice and Mallorca Art Biennales.</p>
+      <a href="project-detail.html#hairchitecture" class="project-link">Learn more →</a>
+    </div>
+
+    <div class="project-card fade-in">
+      <div class="project-tag">Research · Psychology</div>
+      <h3 class="project-title">Cognitive Dissonance & Motivation Loss</h3>
+      <p class="project-desc">Junior Paper exploring how identity-behavior conflict leads to disengagement, drawing on Festinger, Oyserman, and Covington.</p>
+      <a href="project-detail.html#dissonance" class="project-link">Read abstract →</a>
+    </div>
+
+    <div class="project-card fade-in">
+      <div class="project-tag">Research · Statistics</div>
+      <h3 class="project-title">Replication Study: Reductive Allure Effect</h3>
+      <p class="project-desc">Replication of Hopkins et al. (2016) using R and mixed-effects modeling. Examined how neuroscientific language shapes perceived explanation.</p>
+      <a href="project-detail.html#reductive" class="project-link">View on OSF →</a>
+    </div>
+
+    <div class="project-card fade-in">
+      <div class="project-tag">Legal · Immigration</div>
+      <h3 class="project-title">Project Rousseau</h3>
+      <p class="project-desc">Immigration case support — affidavit drafting, multilingual documentation, and statutory research across 9+ active client cases.</p>
+      <a href="project-detail.html#rousseau" class="project-link">Learn more →</a>
+    </div>
+
+    <div class="project-card fade-in">
+      <div class="project-tag">AI · Law &amp; Ethics</div>
+      <h3 class="project-title">Sentient Labs — Campus AI Initiative</h3>
+      <p class="project-desc">Campus AI Lead at a Series A company with 3M+ waitlisted users. Organizing AI hackathons and shaping product through student feedback.</p>
+      <a href="project-detail.html#sentient" class="project-link">Learn more →</a>
+    </div>
+
+    <div class="project-card fade-in">
+      <div class="project-tag">Strategy · Community</div>
+      <h3 class="project-title">PCC Annual Conference Series</h3>
+      <p class="project-desc">Led marketing for 3 consecutive conferences drawing 150+ attendees across Ivy+, government, and corporate sectors.</p>
+      <a href="project-detail.html#pcc" class="project-link">Learn more →</a>
+    </div>
+
+    <div class="project-card fade-in">
+      <div class="project-tag">Writing · Media</div>
+      <h3 class="project-title">Princeton Athletics Digital Media</h3>
+      <p class="project-desc">Live reporting and digital storytelling for Princeton Varsity Athletics — content strategy, social presence, student-athlete voices.</p>
+      <a href="project-detail.html#athletics" class="project-link">See work →</a>
+    </div>
+
+    <div class="project-card fade-in">
+      <div class="project-tag">Research · Psychology</div>
+      <h3 class="project-title">Behavioral Modeling, COMAN Lab</h3>
+      <p class="project-desc">Building predictive behavioral models in R to identify drivers of consumer decision-making, with ggplot2 dashboards for research teams.</p>
+      <a href="project-detail.html#coman" class="project-link">Learn more →</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ACCOMPLISHMENTS -->
+<section id="accomplishments">
+  <div class="section-header fade-in">
+    <span class="section-label">Accomplishments</span>
+    <span class="section-number">03</span>
+  </div>
+  <div class="accomplishments-list">
+
+    <div class="accomplishment-row fade-in">
+      <span class="acc-year">2026–</span>
+      <span class="acc-title">Health Promotion Engagement Specialist, UMatter</span>
+      <span class="acc-org">Princeton University</span>
+    </div>
+
+    <div class="accomplishment-row fade-in">
+      <span class="acc-year">2025–</span>
+      <span class="acc-title">Digital Media Coordinator, Princeton Varsity Athletics</span>
+      <span class="acc-org">Princeton University</span>
+    </div>
+
+    <div class="accomplishment-row fade-in">
+      <span class="acc-year">2025–</span>
+      <span class="acc-title">Campus AI Lead, Sentient Labs</span>
+      <span class="acc-org">New York, NY</span>
+    </div>
+
+    <div class="accomplishment-row fade-in">
+      <span class="acc-year">2025–</span>
+      <span class="acc-title">Behavioral Research, COMAN Lab</span>
+      <span class="acc-org">Princeton University</span>
+    </div>
+
+    <div class="accomplishment-row fade-in">
+      <span class="acc-year">2025</span>
+      <span class="acc-title">Venice &amp; Mallorca Art Biennales — <em style="font-style:italic; color:var(--warm-mid);">hAiRCHITECTURE</em> exhibited</span>
+      <span class="acc-org">International</span>
+    </div>
+
+    <div class="accomplishment-row fade-in">
+      <span class="acc-year">2025</span>
+      <span class="acc-title">Legal Intern, Project Rousseau</span>
+      <span class="acc-org">New York, NY</span>
+    </div>
+
+    <div class="accomplishment-row fade-in">
+      <span class="acc-year">2024–</span>
+      <span class="acc-title">Named Writing Fellow, University Writing Center</span>
+      <span class="acc-org">Princeton University</span>
+    </div>
+
+    <div class="accomplishment-row fade-in">
+      <span class="acc-year">2024–</span>
+      <span class="acc-title">Behavioral Research, COOPER Lab</span>
+      <span class="acc-org">Princeton University</span>
+    </div>
+
+    <div class="accomplishment-row fade-in">
+      <span class="acc-year">2024–</span>
+      <span class="acc-title">Associate Director, OneStudio — University Student Agencies</span>
+      <span class="acc-org">Princeton University</span>
+    </div>
+
+    <div class="accomplishment-row fade-in">
+      <span class="acc-year">2023–</span>
+      <span class="acc-title">Pre-Law Track, P*LAW Program</span>
+      <span class="acc-org">Princeton University</span>
+    </div>
+
+    <div class="accomplishment-row fade-in">
+      <span class="acc-year">2023–</span>
+      <span class="acc-title">Marketing &amp; Outreach Lead, Princeton Caribbean Connection</span>
+      <span class="acc-org">Princeton University</span>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner">
+    <div class="contact-script fade-in">let's connect</div>
+    <p class="contact-sub fade-in">Find me on the links below — always happy to connect.</p>
+    <div class="contact-links fade-in">
+      <a href="mailto:skyelowe@icloud.com">Email</a>
+      <a href="https://www.linkedin.com/in/sky%C3%A9lowe" target="_blank">LinkedIn</a>
+      <a href="mailto:skyelowe@icloud.com?subject=Resume%20Request&body=Hi%20Sky%C3%A9%2C%0A%0AI%27d%20love%20to%20request%20a%20copy%20of%20your%20resume.%0A%0AThank%20you!" class="resume-request">Request Resume</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="footer-script">Skyé Lowe</span>
+  <span class="footer-copy">© 2026 · Princeton, NJ</span>
+</footer>
 
 <script>
-  const cafes = [
-    {
-      name: "Devoción",
-      neighborhood: "Williamsburg",
-      address: "69 Grand St, Brooklyn",
-      rating: 5,
-      review: "Stunning space — the living wall alone is worth the trip. Fast WiFi, plenty of outlets, and the coffee is genuinely exceptional. Gets busy by 11am but never chaotic. My go-to for a full day of deep work.",
-      wifi: "great",
-      outlets: "plenty",
-      noise: "moderate",
-      visited: "Feb 2026"
-    },
-    {
-      name: "Georgie's Coffee",
-      neighborhood: "Lower East Side",
-      address: "182 Broome St, FL 2, New York, NY 10002",
-      rating: 1.7,
-      review: "Always packed, and unfortunately everyone is there with their friends hogging seats. There's a lack of outlets, and while it's a nice space with good lighting, making the trek there feels useless unless you arrive at the crack of dawn.",
-      wifi: "ok",
-      outlets: "none",
-      noise: "moderate",
-      visited: "March 2026"
-    },
-    {
-      name: "Gather",
-      neighborhood: "Lower East Side",
-      address: "54 Orchard St, New York, NY 10002",
-      rating: 3.4,
-      review: "A nice place to do work — lots of seats and the space feels genuinely motivating. Quiet enough to do an interview, and the bathroom is really clean. Downside is the WiFi is slow and the menu is seriously overpriced. If you're willing to pay for the vibe, go for it.",
-      wifi: "ok",
-      outlets: "some",
-      noise: "quiet",
-      visited: "March 2026"
-    },
-    {
-      name: "Hungry Llama",
-      neighborhood: "Williamsburg",
-      address: "679 Washington St, Manhattan",
-      rating: 2.9,
-      review: "Lowkey mid ahh; the design looks so weird with all of the random chairs that they use, and if you are someone that needs a clear space to do work, that cluttered environemnt wont do you any good. Overpriced drinks that look aesthetic but taste mid after your 5th sip. Honestly, make sure your computer is chanrged and try to get a seat by the window. Not good for solo work if you want a quiet space, but kind of a vibe for group work if this is your last resort, LOL.",
-      wifi: "ok",
-      outlets: "some",
-      noise: "moderate",
-      visited: "Oct 2025"
-    },
-    {
-      name: "Butler",
-      neighborhood: "Lower East Side",
-      address: "115 Allen St, Manhattan",
-      rating: 5,
-      review: "Hidden gem. Calm, well-lit, and unpretentious. The kind of place you tell one friend about and regret it. Incredible for long writing sessions — I've drafted entire papers here.",
-      wifi: "great",
-      outlets: "plenty",
-      noise: "quiet",
-      visited: "Oct 2025"
-    },
-    {
-      name: "Colson Patisserie",
-      neighborhood: "Brooklyn Heights",
-      address: "374 9th St, Brooklyn",
-      rating: 4,
-      review: "More café than patisserie at this point. The pastries are unreal and the back room is quiet enough for calls. WiFi requires asking for a password but it's solid. Lovely neighborhood energy.",
-      wifi: "ok",
-      outlets: "some",
-      noise: "quiet",
-      visited: "Sep 2025"
-    }
-  ];
-
-  function tagClass(level) {
-    if (["great","plenty","quiet"].includes(level)) return "good";
-    if (["ok","some","moderate"].includes(level)) return "ok";
-    return "bad";
-  }
-
-  function buildCard(c) {
-    return `
-    <div class="card" data-neighborhood="${c.neighborhood}">
-      <div class="card-top">
-        <div class="card-neighborhood">${c.neighborhood}</div>
-        <div class="card-name">${c.name}</div>
-        <div class="card-address">${c.address}</div>
-        <div class="card-rating">
-         <span class="rating-badge">${c.rating}</span>
-<div class="rating-bar-track"><div class="rating-bar-fill" style="width:${(c.rating / 5) * 100}%"></div></div>
-<span class="rating-num">/ 5</span>
-        </div>
-      </div>
-      <p class="card-review">${c.review}</p>
-      <div class="card-tags">
-        <div class="tag ${tagClass(c.wifi)}"><span class="tag-icon">⚡</span>WiFi ${c.wifi}</div>
-        <div class="tag ${tagClass(c.outlets)}"><span class="tag-icon">🔌</span>Outlets ${c.outlets}</div>
-        <div class="tag ${tagClass(c.noise)}"><span class="tag-icon">🔉</span>${c.noise}</div>
-      </div>
-      <div class="card-footer">
-        <span class="visited-date">visited ${c.visited}</span>
-        <span class="visited-badge">✓ been here</span>
-      </div>
-    </div>`;
-  }
-
-  function render(filter) {
-    const grid = document.getElementById('café-grid');
-    const filtered = filter === 'all' ? cafes : cafes.filter(c => c.neighborhood === filter);
-    document.getElementById('total-count').textContent = filtered.length;
-
-    if (filtered.length === 0) {
-      grid.innerHTML = `<div class="empty"><p>no cafés in this neighborhood yet.</p></div>`;
-    } else {
-      grid.innerHTML = filtered.map(buildCard).join('');
-    }
-  }
-
-  document.querySelectorAll('.filter-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      render(btn.dataset.filter);
-    });
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 30);
   });
 
-  render('all');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // staggered word fade for hero tagline
+  const words = document.querySelectorAll('.word-fade');
+  const seps = document.querySelectorAll('.word-sep');
+  setTimeout(() => {
+    words.forEach((word, i) => {
+      setTimeout(() => {
+        word.classList.add('visible');
+        if (seps[i]) setTimeout(() => seps[i].classList.add('visible'), 200);
+      }, 600 + i * 350);
+    });
+  }, 400);
 </script>
 </body>
 </html>
